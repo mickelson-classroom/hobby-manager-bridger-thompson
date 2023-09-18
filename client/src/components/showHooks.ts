@@ -28,8 +28,7 @@ export function GetShows() {
   return shows
 }
 
-export function GetShow(id?: number) {
-  if (!id) return
+export function GetShow(id: number) {
   const shows = GetShows()
   return shows.find(s => s.id === id)
 }

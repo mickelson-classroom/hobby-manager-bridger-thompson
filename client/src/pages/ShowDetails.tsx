@@ -8,10 +8,10 @@ interface RouteParams {
 
 export const ShowDetails = () => {
   const { id } = useParams<RouteParams>();
-  const show = GetShow(id ? Number(id) : undefined)
+  const show = GetShow(Number(id))
 
   if (!show) return (
-    <div>Unable to find show.</div>
+    <h3 className="text-center">Unable to find show.</h3>
   )
   return (
     <div className="container">
