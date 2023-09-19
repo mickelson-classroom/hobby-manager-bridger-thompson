@@ -6,6 +6,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ShowDetails } from './pages/ShowDetails';
 import { Shows } from './pages/Shows';
 import { NavBar } from './components/NavBar';
+import ErrorBoundary from './components/ErrorBoundary';
 
 const router = createBrowserRouter([
   {
@@ -26,7 +27,9 @@ root.render(
   <React.StrictMode>
     <NavBar />
     <div className='my-3'>
-      <RouterProvider router={router} />
+      <ErrorBoundary fallback={<div>Something went wrong</div>}>
+        <RouterProvider router={router} />
+      </ErrorBoundary>
     </div>
   </React.StrictMode>
 );

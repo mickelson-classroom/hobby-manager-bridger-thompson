@@ -9,7 +9,9 @@ export const Shows = () => {
       <h1>Shows:</h1>
       <div className="row">
         {shows.map((s) =>
-          <Link to={`show/${s.id}`} className="col-12 col-md-6 col-lg-4 col-xl-3 my-1 text-decoration-none">
+          <Link to={`show/${s.id}`}
+            key={s.id}
+            className="col-12 col-md-6 col-lg-4 col-xl-3 my-1 text-decoration-none">
             <div className="card">
               <div className="card-body">
                 <div className="card-title fs-4">{s.title}</div>

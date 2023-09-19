@@ -10,9 +10,7 @@ export const ShowDetails = () => {
   const { id } = useParams<RouteParams>();
   const show = GetShow(Number(id))
 
-  if (!show) return (
-    <h3 className="text-center">Unable to find show.</h3>
-  )
+  if (!show) throw new Error("Unable to find show")
   return (
     <div className="container">
       <h1>{show.title}</h1>
