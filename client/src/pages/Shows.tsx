@@ -20,6 +20,14 @@ export const Shows = () => {
             </div>
           </Link>
         )}
+        <Link to={`show/999`}
+          className="col-12 col-md-6 col-lg-4 col-xl-3 my-1 text-decoration-none">
+          <div className="card">
+            <div className="card-body">
+              <div className="card-title fs-4">Throw Error</div>
+            </div>
+          </div>
+        </Link>
       </div>
     </div>
   )

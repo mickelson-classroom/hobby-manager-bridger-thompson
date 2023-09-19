@@ -27,7 +27,7 @@ root.render(
   <React.StrictMode>
     <NavBar />
     <div className='my-3'>
-      <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      <ErrorBoundary>
         <RouterProvider router={router} />
       </ErrorBoundary>
     </div>
