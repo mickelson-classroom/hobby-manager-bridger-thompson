@@ -7,6 +7,7 @@ import { ShowDetails } from './pages/ShowDetails';
 import { Shows } from './pages/Shows';
 import { NavBar } from './components/NavBar';
 import ErrorBoundary from './components/ErrorBoundary';
+import { ShowProvider } from './pages/ShowProvider';
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,9 @@ root.render(
     <NavBar />
     <div className='my-3'>
       <ErrorBoundary>
-        <RouterProvider router={router} />
+        <ShowProvider>
+          <RouterProvider router={router} />
+        </ShowProvider>
       </ErrorBoundary>
     </div>
   </React.StrictMode>

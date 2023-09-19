@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom"
-import { GetShows } from "../components/showHooks"
+import { useContext } from "react"
+import { ShowContext } from "./ShowProvider"
+import { ShowContextType } from "../models/Show"
 
 
 export const Shows = () => {
-  const shows = GetShows()
+  const { shows } = useContext(ShowContext) as ShowContextType
   return (
     <div className="container">
       <h1>Shows:</h1>

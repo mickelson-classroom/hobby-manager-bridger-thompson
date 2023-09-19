@@ -1,5 +1,7 @@
 import { useParams } from "react-router-dom";
-import { GetShow } from "../components/showHooks";
+import { useContext } from "react";
+import { ShowContext } from "./ShowProvider";
+import { ShowContextType } from "../models/Show";
 
 interface RouteParams {
   id: string;
@@ -8,7 +10,8 @@ interface RouteParams {
 
 export const ShowDetails = () => {
   const { id } = useParams<RouteParams>();
-  const show = GetShow(Number(id))
+  const { shows } = useContext(ShowContext) as ShowContextType;
+  const show = shows.find(s => s.id === Number(id))
 
   if (!show) throw new Error("Unable to find show")
   return (
