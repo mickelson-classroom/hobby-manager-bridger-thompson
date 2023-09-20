@@ -2,13 +2,21 @@ import { Link } from "react-router-dom"
 import { useContext } from "react"
 import { ShowContext } from "./ShowProvider"
 import { ShowContextType } from "../models/Show"
+import { AddShow } from "./AddShow"
 
 
 export const Shows = () => {
   const { shows } = useContext(ShowContext) as ShowContextType
   return (
     <div className="container">
-      <h1>Shows:</h1>
+      <div className="row">
+        <div className="col">
+          <h1>Shows:</h1>
+        </div>
+        <div className="col-auto">
+          <AddShow />
+        </div>
+      </div>
       <div className="row">
         {shows.map((s) =>
           <Link to={`show/${s.id}`}
