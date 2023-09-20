@@ -9,14 +9,13 @@ services:
     image: lscr.io/linuxserver/swag
     cap_add:
       - NET_ADMIN
-    env_file:
-      - .env
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=America/Denver
       - URL=bridger-shows.duckdns.org
       - VALIDATION=duckdns
+      - DUCKDNSTOKEN=${DUCKDNSTOKEN}
       - STAGING=false
     volumes:
       - /home/bridger/data/swag:/config
