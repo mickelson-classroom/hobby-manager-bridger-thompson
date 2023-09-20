@@ -14,8 +14,6 @@ const GenericTextInput: FC<GenericTextInputProps> = ({
   label,
   value,
   onChange,
-  isValid,
-  invalidMessage = "Invalid input",
 }) => {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,13 +28,11 @@ const GenericTextInput: FC<GenericTextInputProps> = ({
       </label>
       <input
         type="text"
-        className={`form-control ${isValid ? 'is-valid' : 'is-invalid'}`}
+        className="form-control"
         id={id}
         value={value}
         onChange={handleInputChange}
       />
-      <div className="invalid-feedback">{invalidMessage}</div>
-      <div className='valid-feedback'>Looks good!</div>
     </div>
   );
 };

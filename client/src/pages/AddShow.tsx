@@ -20,6 +20,8 @@ export const AddShow = () => {
     }
     saveShow(newShow)
   }
+
+  const canSubmit = title !== "" && season > 0 && rating <= 10 && rating > 0
   return (
     <>
       <div className="row text-end">
@@ -40,7 +42,7 @@ export const AddShow = () => {
           <div className="modal-content">
             <div className="modal-header">
               <div className="modal-title fs-5">Add Show:</div>
-              <button className="btn btn-close"></button>
+              <button className="btn btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div className="modal-body">
               <form onSubmit={submitHandler} className="needs-validation" noValidate>
@@ -48,24 +50,21 @@ export const AddShow = () => {
                   id="titleInput"
                   label="Title"
                   value={title}
-                  isValid={title.length > 0}
                   onChange={(value) => setTitle(value)} />
                 <GenericNumberInput
                   id="seasonInput"
                   label="Season"
                   value={season}
-                  isValid={season > 0}
                   onChange={(v) => setSeason(v)} />
                 <GenericNumberInput
                   id="ratingInput"
                   label="Rating"
                   value={rating}
-                  isValid={rating > 0 && rating <= 10}
                   onChange={(v) => setRating(v)} />
 
                 <div className="text-end">
                   <button className="btn btn-success" type="submit"
-                    data-bs-dismiss="modal">Submit</button>
+                    data-bs-dismiss="modal" disabled={!canSubmit}>Submit</button>
                 </div>
               </form>
             </div>
