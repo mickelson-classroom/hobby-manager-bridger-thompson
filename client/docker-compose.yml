@@ -7,6 +7,7 @@ services:
 
   swag:
     image: lscr.io/linuxserver/swag
+    container_name: bridger-swag
     cap_add:
       - NET_ADMIN
     environment:
