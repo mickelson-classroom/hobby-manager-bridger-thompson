@@ -11,6 +11,7 @@ jobs:
 
       - name: redeploy application
         run: |
+          cd client
           docker compose pull
           docker compose build
           docker compose up -d
