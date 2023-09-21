@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
-import GenericTextInput from "../components/GenericTextInput";
-import { GenericNumberInput } from "../components/GenericNumberInput";
-import { Show, ShowContextType } from "../models/Show";
-import { ShowContext } from "./ShowProvider";
+import GenericTextInput from "../../components/GenericTextInput";
+import { GenericNumberInput } from "../../components/GenericNumberInput";
+import { ShowContext } from "../../components/context/showContext";
+import { Show } from "../../models/Show";
 
 export const AddShow = () => {
-  const { saveShow } = useContext(ShowContext) as ShowContextType;
+  const { saveShow } = useContext(ShowContext)
   const [title, setTitle] = useState("")
   const [season, setSeason] = useState(1)
   const [rating, setRating] = useState(1)

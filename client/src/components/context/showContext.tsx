@@ -1,7 +1,16 @@
 import { FC, ReactNode, createContext, useState } from "react"
-import { Show, ShowContextType } from "../models/Show"
+import { Show } from "../../models/Show";
 
-export const ShowContext = createContext<ShowContextType | null>(null)
+
+export type ShowContextType = {
+  shows: Show[];
+  saveShow: (show: Show) => void;
+}
+
+export const ShowContext = createContext<ShowContextType>({
+  shows: [],
+  saveShow: () => { }
+})
 
 export const ShowProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [shows, setShows] = useState<Show[]>([

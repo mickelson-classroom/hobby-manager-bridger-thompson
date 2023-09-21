@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useState } from "react";
-import { ToastType, CustomToast } from "./Toasts";
+import { ToastType, CustomToast } from "../toast/Toasts";
 
 type ToastContextType = {
   toasts: CustomToast[];

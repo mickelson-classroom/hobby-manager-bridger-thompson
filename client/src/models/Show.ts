@@ -12,8 +12,3 @@ export interface Show {
   episodes: Episode[];
   rating: number;
 }
-
-export type ShowContextType = {
-  shows: Show[];
-  saveShow: (show: Show) => void;
-}

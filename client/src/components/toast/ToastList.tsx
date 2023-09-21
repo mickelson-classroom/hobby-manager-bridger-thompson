@@ -22,8 +22,8 @@ const ToastList = ({ data, removeToast }: { data: CustomToast[], removeToast: (i
           aria-live="assertive"
           ref={listRef}
         >
-          {data.map((toast) => (
-            <div className={classes.toast}>
+          {data.map((toast, index) => (
+            <div className={classes.toast} key={index}>
               <Toast
                 key={toast.id}
                 message={toast.message}
