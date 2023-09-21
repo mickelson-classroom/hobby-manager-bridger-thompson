@@ -9,6 +9,7 @@ import { Shows } from './pages/Shows';
 import { NavBar } from './components/NavBar';
 import ErrorBoundary from './components/ErrorBoundary';
 import { ShowProvider } from './pages/ShowProvider';
+import { ToastProvider } from './components/toast/toastContext';
 
 const router = createBrowserRouter([
   {
@@ -29,11 +30,13 @@ root.render(
   <React.StrictMode>
     <NavBar />
     <div className='my-3'>
-      <ErrorBoundary>
-        <ShowProvider>
-          <RouterProvider router={router} />
-        </ShowProvider>
-      </ErrorBoundary>
+      <ToastProvider>
+        <ErrorBoundary>
+          <ShowProvider>
+            <RouterProvider router={router} />
+          </ShowProvider>
+        </ErrorBoundary>
+      </ToastProvider>
     </div>
   </React.StrictMode>
 );

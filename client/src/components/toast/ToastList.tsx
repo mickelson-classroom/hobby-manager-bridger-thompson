@@ -2,9 +2,9 @@ import classes from "./ToastList.module.scss";
 import Toast from "./Toast";
 import { useRef } from "react";
 import { useEffect } from "react";
-import { CustomToast, ToastType } from "./Toasts";
+import { CustomToast } from "./Toasts";
 
-const ToastList = ({ data, position, removeToast }: { data: CustomToast[], position: ToastType, removeToast: (id: number) => void }) => {
+const ToastList = ({ data, removeToast }: { data: CustomToast[], removeToast: (id: number) => void }) => {
   const listRef = useRef(null);
 
   useEffect(() => {
@@ -12,7 +12,7 @@ const ToastList = ({ data, position, removeToast }: { data: CustomToast[], posit
       el?.scrollTo(0, el.scrollHeight);
     };
     handleScrolling(listRef.current);
-  }, [position, data]);
+  }, [data]);
 
   return (
     <>

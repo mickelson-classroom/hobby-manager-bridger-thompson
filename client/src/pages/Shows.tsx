@@ -1,40 +1,15 @@
 import { Link } from "react-router-dom"
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import { ShowContext } from "./ShowProvider"
 import { ShowContextType } from "../models/Show"
 import { AddShow } from "./AddShow"
-import { ToastType, CustomToast } from "../components/toast/Toasts"
 import ToastList from "../components/toast/ToastList"
+import { ToastContext } from "../components/toast/toastContext"
 
 
 export const Shows = () => {
-  const [toasts, setToasts] = useState<CustomToast[]>([]);
-  const position = "top-right"
+  const { toasts, showToast, removeToast, showMultipleToasts } = useContext(ToastContext);
   const { shows } = useContext(ShowContext) as ShowContextType
-
-  const removeToast = (id: number) => {
-    setToasts((prevToasts) => prevToasts.filter((toast) => toast.id !== id));
-  };
-
-  const showToast = (message: string, type: ToastType) => {
-    const toast = {
-      id: Date.now(),
-      message,
-      type,
-    };
-
-    setToasts((prevToasts) => [...prevToasts, toast]);
-
-    setTimeout(() => {
-      removeToast(toast.id);
-    }, 5 * 1000);
-  };
-
-  const showMultipleToasts = () => {
-    for (let i = 0; i < 50; i++) {
-      showToast(`Toast #${i + 1}`, 'success');
-    }
-  };
 
   return (
     <div className="container">
@@ -93,7 +68,7 @@ export const Shows = () => {
             </button>
           </div>
         </div>
-        <ToastList data={toasts} position={position as ToastType} removeToast={removeToast} />
+        <ToastList data={toasts} removeToast={removeToast} />
       </div>
     </div>
   )
