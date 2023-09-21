@@ -29,6 +29,13 @@ export const Shows = () => {
       removeToast(toast.id);
     }, 5 * 1000);
   };
+
+  const showMultipleToasts = () => {
+    for (let i = 0; i < 50; i++) {
+      showToast(`Toast #${i + 1}`, 'success');
+    }
+  };
+
   return (
     <div className="container">
       <div className="row">
@@ -61,22 +68,28 @@ export const Shows = () => {
           </div>
         </Link>
         <div className="row mt-2">
-          <div className="col text-end">
+          <div className="col-12 col-md-6 col-lg-3 mb-2">
             <button onClick={() => showToast("A success message", "success")}
-              className="btn btn-success">
+              className="mx-2 w-100 btn btn-success">
               Show Success Toast
             </button>
           </div>
-          <div className="col-auto">
+          <div className="col-12 col-md-6 col-lg-3 mb-2">
             <button onClick={() => showToast("A failure message", "error")}
-              className="btn btn-danger">
+              className="mx-2 w-100 btn btn-danger">
               Show Error Toast
             </button>
           </div>
-          <div className="col">
+          <div className="col-12 col-md-6 col-lg-3 mb-2">
             <button onClick={() => showToast("An info message", "info")}
-              className="btn btn-secondary">
+              className="mx-2 w-100 btn btn-secondary">
               Show Info Toast
+            </button>
+          </div>
+          <div className="col-12 col-md-6 col-lg-3 mb-2">
+            <button onClick={() => showMultipleToasts()}
+              className="mx-2 w-100 btn btn-info">
+              Show 50 Toasts
             </button>
           </div>
         </div>
