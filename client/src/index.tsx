@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './assets/custom.scss'
 import 'bootstrap';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ShowDetails } from './pages/ShowDetails';
 import { Shows } from './pages/Shows';

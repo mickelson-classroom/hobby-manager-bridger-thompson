@@ -1,12 +1,34 @@
 import { Link } from "react-router-dom"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { ShowContext } from "./ShowProvider"
 import { ShowContextType } from "../models/Show"
 import { AddShow } from "./AddShow"
+import { ToastType, CustomToast } from "../components/toast/Toasts"
+import ToastList from "../components/toast/ToastList"
 
 
 export const Shows = () => {
+  const [toasts, setToasts] = useState<CustomToast[]>([]);
+  const position = "top-right"
   const { shows } = useContext(ShowContext) as ShowContextType
+
+  const removeToast = (id: number) => {
+    setToasts((prevToasts) => prevToasts.filter((toast) => toast.id !== id));
+  };
+
+  const showToast = (message: string, type: ToastType) => {
+    const toast = {
+      id: Date.now(),
+      message,
+      type,
+    };
+
+    setToasts((prevToasts) => [...prevToasts, toast]);
+
+    setTimeout(() => {
+      removeToast(toast.id);
+    }, 5 * 1000);
+  };
   return (
     <div className="container">
       <div className="row">
@@ -38,8 +60,28 @@ export const Shows = () => {
             </div>
           </div>
         </Link>
+        <div className="row mt-2">
+          <div className="col text-end">
+            <button onClick={() => showToast("A success message", "success")}
+              className="btn btn-success">
+              Show Success Toast
+            </button>
+          </div>
+          <div className="col-auto">
+            <button onClick={() => showToast("A failure message", "error")}
+              className="btn btn-danger">
+              Show Error Toast
+            </button>
+          </div>
+          <div className="col">
+            <button onClick={() => showToast("An info message", "info")}
+              className="btn btn-secondary">
+              Show Info Toast
+            </button>
+          </div>
+        </div>
+        <ToastList data={toasts} position={position as ToastType} removeToast={removeToast} />
       </div>
     </div>
   )
 }
-
