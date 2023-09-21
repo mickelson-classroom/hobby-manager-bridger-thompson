@@ -1,13 +1,18 @@
-import "./Toast.css";
+import React from "react";
 import {
   SuccessIcon,
   ErrorIcon,
   InfoIcon,
-  CloseIcon
-} from "./Icons"
+} from "./Icons";
 import { ToastType } from "./Toasts";
 
-const Toast = ({ message, type, onClose }: { message: string, type: ToastType, onClose: () => void }) => {
+interface ToastProps {
+  message: string;
+  type: ToastType;
+  onClose: () => void;
+}
+
+const Toast: React.FC<ToastProps> = ({ message, type, onClose }) => {
   const iconMap = {
     success: <SuccessIcon />,
     error: <ErrorIcon />,
@@ -15,21 +20,32 @@ const Toast = ({ message, type, onClose }: { message: string, type: ToastType, o
   };
 
   const toastIcon = iconMap[type] || null;
+
   return (
-    <div className={`toast show toast--${type}`} role="alert">
-      <div className="toast-message">
-        {toastIcon && (
-          <div className="icon icon--lg icon--thumb">{toastIcon}</div>
-        )}
-        <p className="my-auto">{message}</p>
+    <div className={`toast my-1 show toast-${type}`} role="alert">
+      <div className="toast-body">
+        <div className="row">
+          {toastIcon && (
+            <div className="col-auto">
+              <div className="me-2">{toastIcon}</div>
+            </div>
+          )}
+          <div className="col my-auto">
+            <div>{message}</div>
+          </div>
+          <div className="col-auto">
+            <button
+              type="button"
+              className="btn-close"
+              data-bs-dismiss="toast"
+              aria-label="Close"
+              onClick={onClose}
+            ></button>
+          </div>
+        </div>
       </div>
-      <button className="toast-close-btn" onClick={onClose}>
-        <span className="icon">
-          <CloseIcon />
-        </span>
-      </button>
     </div>
-  )
-}
+  );
+};
 
 export default Toast;

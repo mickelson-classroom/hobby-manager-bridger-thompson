@@ -1,0 +1,29 @@
+:root {
+  --toastSpeed: 250ms;
+}
+
+.toastList {
+  max-width: 400px;
+  max-height: 100vh;
+}
+
+
+@keyframes toastInRight {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+
+.toastListTopRight .toast {
+  animation: toastInRight var(--toastSpeed);
+}
+
+.toastList .toast {
+  transition: transform var(--toastSpeed), opacity var(--toastSpeed),
+    box-shadow var(--toastSpeed) ease-in-out;
+}

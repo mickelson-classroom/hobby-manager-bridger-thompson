@@ -9,7 +9,3 @@ export const ErrorIcon = () => (
 export const InfoIcon = () => (
   <i className={`bi bi-info-circle fs-4`} />
 )
-
-export const CloseIcon = () => (
-  <i className={`bi bi-x-lg fs-5`} />
-)
