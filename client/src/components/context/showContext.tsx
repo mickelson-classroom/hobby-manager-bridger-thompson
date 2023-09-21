@@ -1,42 +1,30 @@
-import { FC, ReactNode, createContext, useState } from "react"
+import { FC, ReactNode, createContext, useState, useEffect } from "react";
 import { Show } from "../../models/Show";
-
 
 export type ShowContextType = {
   shows: Show[];
   saveShow: (show: Show) => void;
-}
+  removeShow: (id: number) => void;
+  updateShow: (updatedShow: Show) => void;
+};
 
 export const ShowContext = createContext<ShowContextType>({
   shows: [],
-  saveShow: () => { }
-})
+  saveShow: () => { },
+  removeShow: () => { },
+  updateShow: () => { }
+});
 
 export const ShowProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const [shows, setShows] = useState<Show[]>([
-    {
-      id: 1,
-      title: "Blue Bloods",
-      season: 1,
-      episodes: [],
-      rating: 8
-    },
-    {
-      id: 2,
-      title: "House",
-      season: 1,
-      episodes: [],
-      rating: 9
-    },
-    {
-      id: 3,
-      title: "The Last Kingdom",
-      season: 1,
-      episodes: [],
-      rating: 8.5
+  const [shows, setShows] = useState<Show[]>([]);
+
+  useEffect(() => {
+    const savedShows = localStorage.getItem("shows");
+    console.log(savedShows)
+    if (savedShows) {
+      setShows(JSON.parse(savedShows));
     }
-  ])
-  console.log("loaded shows")
+  }, []);
 
   const saveShow = (show: Show) => {
     const newShow: Show = {
@@ -44,14 +32,33 @@ export const ShowProvider: FC<{ children: ReactNode }> = ({ children }) => {
       title: show.title,
       season: show.season,
       episodes: show.episodes,
-      rating: show.rating
+      rating: show.rating,
+    };
+    const combinedShows = [...shows, newShow]
+    setShows(combinedShows);
+    localStorage.setItem("shows", JSON.stringify(combinedShows));
+  };
+
+  const updateShow = (updatedShow: Show) => {
+    const showIndex = shows.findIndex((show) => show.id === updatedShow.id);
+
+    if (showIndex !== -1) {
+      const updatedShows = [...shows];
+      updatedShows[showIndex] = updatedShow;
+      setShows(updatedShows);
+      localStorage.setItem("shows", JSON.stringify(updatedShows));
     }
-    setShows([...shows, newShow])
+  };
+
+  const removeShow = (id: number) => {
+    const remainingShows = shows.filter(s => s.id !== id)
+    setShows(remainingShows)
+    localStorage.setItem("shows", JSON.stringify(remainingShows))
   }
 
   return (
-    <ShowContext.Provider value={{ shows, saveShow }}>
+    <ShowContext.Provider value={{ shows, saveShow, removeShow, updateShow }}>
       {children}
     </ShowContext.Provider>
-  )
-}
+  );
+};

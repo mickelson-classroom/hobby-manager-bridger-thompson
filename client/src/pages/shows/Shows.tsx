@@ -1,11 +1,12 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useContext } from "react"
 import { ShowContext } from "../../components/context/showContext"
 import { AddShow } from "./AddShow"
 
 
 export const Shows = () => {
-  const { shows } = useContext(ShowContext)
+  const { shows, removeShow } = useContext(ShowContext)
+  const navigate = useNavigate();
 
   return (
     <div className="container">
@@ -19,16 +20,26 @@ export const Shows = () => {
       </div>
       <div className="row">
         {shows.map((s) =>
-          <Link to={`show/${s.id}`}
+          <div
+            onClick={() => navigate(`show/${s.id}`)}
+            role="button"
             key={s.id}
             className="col-12 col-md-6 col-lg-4 col-xl-3 my-1 text-decoration-none">
             <div className="card">
               <div className="card-body">
-                <div className="card-title fs-4">{s.title}</div>
+                <div className="row">
+                  <div className="col">
+                    <div className="card-title fs-4">{s.title}</div>
+                  </div>
+                  <div className="col-auto">
+                    <button className="btn btn-close"
+                      onClick={(e) => { e.stopPropagation(); removeShow(s.id) }}></button>
+                  </div>
+                </div>
                 <div className="card-text">Season {s.season}</div>
               </div>
             </div>
-          </Link>
+          </div>
         )}
         <Link to={`show/999`}
           className="col-12 col-md-6 col-lg-4 col-xl-3 my-1 text-decoration-none">

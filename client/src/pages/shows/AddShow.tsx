@@ -1,24 +1,29 @@
-import { useContext, useState } from "react";
+import { FC, useContext, useState } from "react";
 import GenericTextInput from "../../components/GenericTextInput";
 import { GenericNumberInput } from "../../components/GenericNumberInput";
 import { ShowContext } from "../../components/context/showContext";
 import { Show } from "../../models/Show";
 
-export const AddShow = () => {
-  const { saveShow } = useContext(ShowContext)
-  const [title, setTitle] = useState("")
-  const [season, setSeason] = useState(1)
-  const [rating, setRating] = useState(1)
+export const AddShow: FC<{ show?: Show }> = ({ show }) => {
+  const { saveShow, updateShow } = useContext(ShowContext)
+  const [title, setTitle] = useState(show?.title ?? "")
+  const [season, setSeason] = useState(show?.season ?? 1)
+  const [rating, setRating] = useState(show?.rating ?? 1)
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newShow: Show = {
-      id: Math.random(),
+      id: show?.id ?? Math.random(),
       title,
       season,
       rating,
-      episodes: []
+      episodes: show?.episodes ?? []
     }
-    saveShow(newShow)
+    if (!show) {
+      saveShow(newShow)
+    }
+    else {
+      updateShow(newShow)
+    }
   }
 
   const canSubmit = title !== "" && season > 0 && rating <= 10 && rating > 0
@@ -31,7 +36,7 @@ export const AddShow = () => {
             id="modalStart"
             data-bs-toggle="modal"
             data-bs-target="#addShowModal">
-            Add
+            {show ? <i className="bi bi-pencil" /> : "Add"}
           </button>
         </div>
       </div>
@@ -41,7 +46,7 @@ export const AddShow = () => {
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <div className="modal-title fs-5">Add Show:</div>
+              <div className="modal-title fs-5">{show ? "Edit" : "Add"} Show:</div>
               <button className="btn btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div className="modal-body">

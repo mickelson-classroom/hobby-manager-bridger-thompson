@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import { ShowContext } from "../../components/context/showContext";
+import { AddShow } from "./AddShow";
 
 interface RouteParams {
   id: string;
@@ -15,14 +16,27 @@ export const ShowDetails = () => {
   if (!show) throw new Error("Unable to find show")
   return (
     <div className="container">
-      <h1>{show.title}</h1>
-      <div>Season: {show.season}</div>
-      <div>Rating: {show.rating}</div>
-      <div>
-        <div>Episodes:</div>
-        {show.episodes.map((e) =>
-          <div>{e.title}</div>
-        )}
+      <div className="card">
+        <div className="card-body">
+          <div className="card-title">
+            <div className="row">
+              <div className="col">
+                <h1>{show.title}</h1>
+              </div>
+              <div className="col-auto">
+                <AddShow show={show} />
+              </div>
+            </div>
+          </div>
+          <div className="card-text">Season: {show.season}</div>
+          <div className="card-text">Rating: {show.rating}</div>
+          <div className="card-text">
+            <div>Episodes:</div>
+            {show.episodes.map((e) =>
+              <div>{e.title}</div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   )
