@@ -1,10 +1,11 @@
 import classes from "./ToastList.module.scss";
 import Toast from "./Toast";
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import { useEffect } from "react";
-import { CustomToast } from "./Toasts";
+import { ToastContext } from "../context/toastContext";
 
-const ToastList = ({ data, removeToast }: { data: CustomToast[], removeToast: (id: number) => void }) => {
+const ToastList = () => {
+  const { toasts, removeToast } = useContext(ToastContext);
   const listRef = useRef(null);
 
   useEffect(() => {
@@ -12,17 +13,17 @@ const ToastList = ({ data, removeToast }: { data: CustomToast[], removeToast: (i
       el?.scrollTo(0, el.scrollHeight);
     };
     handleScrolling(listRef.current);
-  }, [data]);
+  }, [toasts]);
 
   return (
     <>
-      {data.length > 0 && (
+      {toasts.length > 0 && (
         <div
           className={`${classes.toastList} ${classes.toastListTopRight} position-fixed overflow-x-hidden overflow-auto w-100 top-0 end-0 p-3`}
           aria-live="assertive"
           ref={listRef}
         >
-          {data.map((toast, index) => (
+          {toasts.map((toast, index) => (
             <div className={classes.toast} key={index}>
               <Toast
                 key={toast.id}
@@ -35,7 +36,7 @@ const ToastList = ({ data, removeToast }: { data: CustomToast[], removeToast: (i
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
 export default ToastList;

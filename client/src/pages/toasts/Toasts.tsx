@@ -42,7 +42,7 @@ export const Toasts = () => {
           </button>
         </div>
       </div>
-      <ToastList data={toasts} removeToast={removeToast} />
+      <ToastList />
     </div>
   );
 };

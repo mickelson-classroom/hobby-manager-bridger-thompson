@@ -1,4 +1,5 @@
 import { Component, ErrorInfo, ReactNode } from "react";
+import { ToastError } from "./ToastError";
 
 type ErrorBoundaryProps = {
   children: ReactNode;
@@ -35,6 +36,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
           <h1 className="text-center">ERROR</h1>
           <div className="fs-4">{this.state.error.message}</div>
           <div className="fs-5">{this.state.error.stack}</div>
+          <ToastError error={this.state.error} />
         </div>
       );
     }
