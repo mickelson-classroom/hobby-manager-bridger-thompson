@@ -9,6 +9,7 @@ export const AddShow: FC<{ show?: Show }> = ({ show }) => {
   const [title, setTitle] = useState(show?.title ?? "")
   const [season, setSeason] = useState(show?.season ?? 1)
   const [rating, setRating] = useState(show?.rating ?? 1)
+  
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newShow: Show = {

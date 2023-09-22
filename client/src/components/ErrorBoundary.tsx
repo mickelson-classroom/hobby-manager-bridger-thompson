@@ -1,4 +1,4 @@
-import { Component, ErrorInfo, ReactNode } from 'react';
+import { Component, ErrorInfo, ReactNode } from "react";
 
 type ErrorBoundaryProps = {
   children: ReactNode;
@@ -30,8 +30,10 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   render() {
     if (this.state.hasError) {
       return (
-        <div>Errors</div>
-      )
+        <div className="container text-center">
+          <h1>ERROR</h1>
+        </div>
+      );
     }
 
     return this.props.children;

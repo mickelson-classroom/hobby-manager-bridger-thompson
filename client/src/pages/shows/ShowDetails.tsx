@@ -11,9 +11,9 @@ interface RouteParams {
 export const ShowDetails = () => {
   const { id } = useParams<RouteParams>();
   const { shows } = useContext(ShowContext);
-  const show = shows.find(s => s.id === Number(id))
+  const show = shows.find((s) => s.id === Number(id));
 
-  if (!show) throw new Error("Unable to find show")
+  if (!show) throw new Error("Unable to find show");
   return (
     <div className="container">
       <div className="card">
@@ -32,12 +32,12 @@ export const ShowDetails = () => {
           <div className="card-text">Rating: {show.rating}</div>
           <div className="card-text">
             <div>Episodes:</div>
-            {show.episodes.map((e) =>
+            {show.episodes.map((e) => (
               <div>{e.title}</div>
-            )}
+            ))}
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

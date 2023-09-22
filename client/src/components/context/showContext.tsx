@@ -10,21 +10,30 @@ export type ShowContextType = {
 
 export const ShowContext = createContext<ShowContextType>({
   shows: [],
-  saveShow: () => { },
-  removeShow: () => { },
-  updateShow: () => { }
+  saveShow: () => {},
+  removeShow: () => {},
+  updateShow: () => {},
 });
 
+const getStoredShows = () => {
+  const savedShowsString = localStorage.getItem("shows") ?? "[]";
+  return JSON.parse(savedShowsString);
+};
+
+const storeShows = (shows: Show[]) => {
+  localStorage.setItem("shows", JSON.stringify(shows));
+};
+
 export const ShowProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const [shows, setShows] = useState<Show[]>([]);
+  const [shows, setShows] = useState<Show[]>(getStoredShows());
 
   useEffect(() => {
-    const savedShows = localStorage.getItem("shows");
-    console.log(savedShows)
-    if (savedShows) {
-      setShows(JSON.parse(savedShows));
-    }
-  }, []);
+    const handler = setTimeout(() => {
+      storeShows(shows);
+    }, 500);
+
+    return () => clearTimeout(handler);
+  }, [shows]);
 
   const saveShow = (show: Show) => {
     const newShow: Show = {
@@ -34,27 +43,21 @@ export const ShowProvider: FC<{ children: ReactNode }> = ({ children }) => {
       episodes: show.episodes,
       rating: show.rating,
     };
-    const combinedShows = [...shows, newShow]
+    const combinedShows = [...shows, newShow];
     setShows(combinedShows);
-    localStorage.setItem("shows", JSON.stringify(combinedShows));
   };
 
   const updateShow = (updatedShow: Show) => {
-    const showIndex = shows.findIndex((show) => show.id === updatedShow.id);
-
-    if (showIndex !== -1) {
-      const updatedShows = [...shows];
-      updatedShows[showIndex] = updatedShow;
-      setShows(updatedShows);
-      localStorage.setItem("shows", JSON.stringify(updatedShows));
-    }
+    setShows((oldShows) => [
+      updatedShow,
+      ...oldShows.filter((b) => b.id !== updatedShow.id),
+    ]);
   };
 
   const removeShow = (id: number) => {
-    const remainingShows = shows.filter(s => s.id !== id)
-    setShows(remainingShows)
-    localStorage.setItem("shows", JSON.stringify(remainingShows))
-  }
+    const remainingShows = shows.filter((s) => s.id !== id);
+    setShows(remainingShows);
+  };
 
   return (
     <ShowContext.Provider value={{ shows, saveShow, removeShow, updateShow }}>
