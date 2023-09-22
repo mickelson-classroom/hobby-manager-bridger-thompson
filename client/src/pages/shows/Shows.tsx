@@ -2,6 +2,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ShowContext } from "../../components/context/showContext";
 import { AddShow } from "./AddShow";
+import { Bubbles } from "../../components/bubbles/Bubbles";
+import { Submarine } from "../../components/submarine/Submarine";
 
 export const Shows = () => {
   const { shows, removeShow } = useContext(ShowContext);
@@ -57,6 +59,8 @@ export const Shows = () => {
           </div>
         </Link>
       </div>
+      <Submarine />
+      <Bubbles />
     </div>
   );
 };

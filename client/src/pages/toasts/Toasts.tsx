@@ -3,8 +3,7 @@ import { ToastContext } from "../../components/context/toastContext";
 import ToastList from "../../components/toast/ToastList";
 
 export const Toasts = () => {
-  const { toasts, showToast, removeToast, showMultipleToasts } =
-    useContext(ToastContext);
+  const { showToast, showMultipleToasts } = useContext(ToastContext);
   return (
     <div className="container">
       <h1 className="text-center">Toasts</h1>
