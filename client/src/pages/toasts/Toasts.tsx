@@ -1,16 +1,30 @@
-import { useContext } from "react";
-import { ToastContext } from "../../components/context/toastContext";
 import ToastList from "../../components/toast/ToastList";
+import { useAppDispatch } from "../../app/hooks";
+import { CustomToast, ToastType } from "../../components/toast/Toasts";
+import { remove, show, showMultiple } from "../../components/toast/toast-slice";
 
 export const Toasts = () => {
-  const { showToast, showMultipleToasts } = useContext(ToastContext);
+  const dispatch = useAppDispatch();
+
+  const showToastHandler = (message: string, type: ToastType) => {
+    const newToast: CustomToast = {
+      id: Math.random(),
+      message,
+      type
+    };
+    dispatch(show(newToast))
+    setTimeout(() => {
+      dispatch(remove(newToast.id))
+    }, 5 * 1000);
+  }
+
   return (
     <div className="container">
       <h1 className="text-center">Toasts</h1>
       <div className="row mt-2">
         <div className="col-12 col-md-6 col-lg-3 mb-2">
           <button
-            onClick={() => showToast("A success message", "success")}
+            onClick={() => showToastHandler("A success message", "success")}
             className="mx-2 w-100 btn btn-success"
           >
             Show Success Toast
@@ -18,7 +32,7 @@ export const Toasts = () => {
         </div>
         <div className="col-12 col-md-6 col-lg-3 mb-2">
           <button
-            onClick={() => showToast("A failure message", "error")}
+            onClick={() => showToastHandler("A failure message", "error")}
             className="mx-2 w-100 btn btn-danger"
           >
             Show Error Toast
@@ -26,7 +40,7 @@ export const Toasts = () => {
         </div>
         <div className="col-12 col-md-6 col-lg-3 mb-2">
           <button
-            onClick={() => showToast("An info message", "info")}
+            onClick={() => showToastHandler("An info message", "info")}
             className="mx-2 w-100 btn btn-secondary"
           >
             Show Info Toast
@@ -34,7 +48,7 @@ export const Toasts = () => {
         </div>
         <div className="col-12 col-md-6 col-lg-3 mb-2">
           <button
-            onClick={() => showMultipleToasts()}
+            onClick={() => dispatch(showMultiple())}
             className="mx-2 w-100 btn btn-info"
           >
             Show 50 Toasts

@@ -7,11 +7,12 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { NavBar } from "./components/NavBar";
 import ErrorBoundary from "./components/ErrorBoundary";
-import { ToastProvider } from "./components/context/toastContext";
 import { ShowDetails } from "./pages/shows/ShowDetails";
 import { ShowProvider } from "./components/context/showContext";
 import { Shows } from "./pages/shows/Shows";
 import { Toasts } from "./pages/toasts/Toasts";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -19,7 +20,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <ToastProvider>
+    <Provider store={store}>
       <ShowProvider>
         <Router>
           <NavBar />
@@ -34,6 +35,6 @@ root.render(
           </div>
         </Router>
       </ShowProvider>
-    </ToastProvider>
+    </Provider>
   </React.StrictMode>
 );

@@ -1,11 +1,13 @@
 import classes from "./ToastList.module.scss";
 import Toast from "./Toast";
-import { useContext, useRef } from "react";
+import { useRef } from "react";
 import { useEffect } from "react";
-import { ToastContext } from "../context/toastContext";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { remove } from "./toast-slice";
 
 const ToastList = () => {
-  const { toasts, removeToast } = useContext(ToastContext);
+  const toasts = useAppSelector((state) => state.toasts.toasts);
+  const dispatch = useAppDispatch();
   const listRef = useRef(null);
 
   useEffect(() => {
@@ -14,6 +16,10 @@ const ToastList = () => {
     };
     handleScrolling(listRef.current);
   }, [toasts]);
+
+  const handleClick = (id: number) => {
+    dispatch(remove(id))
+  }
 
   return (
     <>
@@ -29,7 +35,7 @@ const ToastList = () => {
                 key={toast.id}
                 message={toast.message}
                 type={toast.type}
-                onClose={() => removeToast(toast.id)}
+                onClose={() => handleClick(toast.id)}
               />
             </div>
           ))}

@@ -7,9 +7,8 @@ export const ToastError: FC<{
 }> = ({ error }) => {
   const { showToast } = useContext(ToastContext);
   useEffect(() => {
-    console.log("error");
     showToast(`Error: ${error.message}`, "error");
-  }, [error]);
+  }, [error, showToast]);
 
   return <ToastList />;
 };
