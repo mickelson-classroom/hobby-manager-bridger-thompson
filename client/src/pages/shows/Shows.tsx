@@ -1,13 +1,19 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { ShowContext } from "../../components/context/showContext";
 import { AddShow } from "./AddShow";
 import { Bubbles } from "../../components/bubbles/Bubbles";
 import { Submarine } from "../../components/submarine/Submarine";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { removeShow } from "./show-slice";
 
 export const Shows = () => {
-  const { shows, removeShow } = useContext(ShowContext);
+  const shows = useAppSelector((state) => state.shows.shows)
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const removeHandler = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
+    e.stopPropagation();
+    dispatch(removeShow(id))
+  }
 
   return (
     <div className="container">
@@ -36,10 +42,7 @@ export const Shows = () => {
                   <div className="col-auto">
                     <button
                       className="btn btn-close"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        removeShow(s.id);
-                      }}
+                      onClick={(e) => removeHandler(e, s.id)}
                     ></button>
                   </div>
                 </div>

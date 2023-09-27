@@ -1,15 +1,16 @@
-import { FC, useContext, useState } from "react";
+import { FC, useState } from "react";
 import GenericTextInput from "../../components/GenericTextInput";
 import { GenericNumberInput } from "../../components/GenericNumberInput";
-import { ShowContext } from "../../components/context/showContext";
 import { Show } from "../../models/Show";
+import { useAppDispatch } from "../../app/hooks";
+import { saveShow, updateShow } from "./show-slice";
 
 export const AddShow: FC<{ show?: Show }> = ({ show }) => {
-  const { saveShow, updateShow } = useContext(ShowContext)
   const [title, setTitle] = useState(show?.title ?? "")
   const [season, setSeason] = useState(show?.season ?? 1)
   const [rating, setRating] = useState(show?.rating ?? 1)
-  
+  const dispatch = useAppDispatch();
+
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newShow: Show = {
@@ -20,10 +21,10 @@ export const AddShow: FC<{ show?: Show }> = ({ show }) => {
       episodes: show?.episodes ?? []
     }
     if (!show) {
-      saveShow(newShow)
+      dispatch(saveShow(newShow))
     }
     else {
-      updateShow(newShow)
+      dispatch(updateShow(newShow))
     }
   }
 
