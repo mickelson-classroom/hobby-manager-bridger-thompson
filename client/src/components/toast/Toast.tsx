@@ -4,7 +4,7 @@ import {
   ErrorIcon,
   InfoIcon,
 } from "./Icons";
-import { ToastType } from "./Toasts";
+import { ToastType } from "../../models/Toasts";
 
 interface ToastProps {
   message: string;

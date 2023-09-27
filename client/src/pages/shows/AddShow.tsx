@@ -1,14 +1,16 @@
 import { FC, useState } from "react";
-import GenericTextInput from "../../components/GenericTextInput";
-import { GenericNumberInput } from "../../components/GenericNumberInput";
+import { GenericNumberInput } from "../../components/forms/GenericNumberInput";
 import { Show } from "../../models/Show";
 import { useAppDispatch } from "../../app/hooks";
 import { saveShow, updateShow } from "./show-slice";
+import GenericTextInput from "../../components/forms/GenericTextInput";
+import { FileUpload } from "../../components/forms/FileUpload";
 
 export const AddShow: FC<{ show?: Show }> = ({ show }) => {
   const [title, setTitle] = useState(show?.title ?? "")
   const [season, setSeason] = useState(show?.season ?? 1)
   const [rating, setRating] = useState(show?.rating ?? 1)
+  const [imageUri, setImageUri] = useState(show?.imageUri ?? "")
   const dispatch = useAppDispatch();
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
@@ -18,10 +20,15 @@ export const AddShow: FC<{ show?: Show }> = ({ show }) => {
       title,
       season,
       rating,
-      episodes: show?.episodes ?? []
+      episodes: show?.episodes ?? [],
+      imageUri,
     }
     if (!show) {
       dispatch(saveShow(newShow))
+      setTitle("")
+      setSeason(1)
+      setRating(1)
+      setImageUri("")
     }
     else {
       dispatch(updateShow(newShow))
@@ -68,7 +75,8 @@ export const AddShow: FC<{ show?: Show }> = ({ show }) => {
                   label="Rating"
                   value={rating}
                   onChange={(v) => setRating(v)} />
-
+                <FileUpload onImageSelect={(v) => setImageUri(v)} />
+                {imageUri && <img src={imageUri} alt="upload" className="img-fluid" style={{ maxHeight: "20ex" }} />}
                 <div className="text-end">
                   <button className="btn btn-success" type="submit"
                     data-bs-dismiss="modal" disabled={!canSubmit}>Submit</button>

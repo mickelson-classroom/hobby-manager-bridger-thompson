@@ -1,5 +1,5 @@
 import { Component, ErrorInfo, ReactNode } from "react";
-import { ToastError } from "./ToastError";
+import { ToastError } from "./toast/ToastError";
 
 type ErrorBoundaryProps = {
   children: ReactNode;

@@ -1,6 +1,6 @@
 import { FC, useContext, useEffect } from "react";
-import { ToastContext } from "./context/toastContext";
-import ToastList from "./toast/ToastList";
+import { ToastContext } from "../context/toastContext";
+import ToastList from "./ToastList";
 
 export const ToastError: FC<{
   error: Error;

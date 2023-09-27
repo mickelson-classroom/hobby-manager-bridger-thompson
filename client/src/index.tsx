@@ -13,6 +13,7 @@ import { Shows } from "./pages/shows/Shows";
 import { Toasts } from "./pages/toasts/Toasts";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
+import ToastList from "./components/toast/ToastList";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -31,6 +32,7 @@ root.render(
                 <Route path="/show/:id" element={<ShowDetails />} />
                 <Route path="/toasts" element={<Toasts />} />
               </Routes>
+              <ToastList />
             </ErrorBoundary>
           </div>
         </Router>

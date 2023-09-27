@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { CustomToast } from "../../components/toast/Toasts";
+import { CustomToast } from "../../models/Toasts";
 
 
 interface ToastState {

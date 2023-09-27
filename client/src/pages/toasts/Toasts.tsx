@@ -1,6 +1,5 @@
-import ToastList from "../../components/toast/ToastList";
 import { useAppDispatch } from "../../app/hooks";
-import { CustomToast, ToastType } from "../../components/toast/Toasts";
+import { CustomToast, ToastType } from "../../models/Toasts";
 import { remove, show, showMultiple } from "../../components/toast/toast-slice";
 
 export const Toasts = () => {
@@ -55,7 +54,6 @@ export const Toasts = () => {
           </button>
         </div>
       </div>
-      <ToastList />
     </div>
   );
 };

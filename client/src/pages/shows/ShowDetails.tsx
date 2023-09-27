@@ -16,24 +16,36 @@ export const ShowDetails = () => {
   return (
     <div className="container">
       <div className="card">
-        <div className="card-body">
-          <div className="card-title">
-            <div className="row">
-              <div className="col">
-                <h1>{show.title}</h1>
+        <div className="row">
+          {show.imageUri && (
+            <div className="col-md-auto col-12">
+              <img src={show.imageUri}
+                alt="show"
+                className="img-fluid rounded-start"
+                style={{ maxHeight: "30ex" }} />
+            </div>
+          )}
+          <div className="col">
+            <div className="card-body">
+              <div className="card-title">
+                <div className="row">
+                  <div className="col">
+                    <h1>{show.title}</h1>
+                  </div>
+                  <div className="col-auto">
+                    <AddShow show={show} />
+                  </div>
+                </div>
               </div>
-              <div className="col-auto">
-                <AddShow show={show} />
+              <div className="card-text">Season: {show.season}</div>
+              <div className="card-text">Rating: {show.rating}</div>
+              <div className="card-text">
+                <div>Episodes:</div>
+                {show.episodes.map((e) => (
+                  <div>{e.title}</div>
+                ))}
               </div>
             </div>
-          </div>
-          <div className="card-text">Season: {show.season}</div>
-          <div className="card-text">Rating: {show.rating}</div>
-          <div className="card-text">
-            <div>Episodes:</div>
-            {show.episodes.map((e) => (
-              <div>{e.title}</div>
-            ))}
           </div>
         </div>
       </div>

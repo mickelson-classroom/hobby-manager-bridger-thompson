@@ -11,4 +11,5 @@ export interface Show {
   season: number;
   episodes: Episode[];
   rating: number;
+  imageUri?: string;
 }
