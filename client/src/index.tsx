@@ -5,7 +5,7 @@ import "./assets/custom.scss";
 import "bootstrap";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { NavBar } from "./components/NavBar";
+import { NavBar } from "./components/nav/NavBar";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ShowDetails } from "./pages/shows/ShowDetails";
 import { ShowProvider } from "./components/context/showContext";
@@ -14,6 +14,8 @@ import { Toasts } from "./pages/toasts/Toasts";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
 import ToastList from "./components/toast/ToastList";
+import { Other } from "./pages/Other";
+import { MobileNavBar } from "./components/nav/MobileNavBar";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -31,10 +33,12 @@ root.render(
                 <Route path="/" element={<Shows />} />
                 <Route path="/show/:id" element={<ShowDetails />} />
                 <Route path="/toasts" element={<Toasts />} />
+                <Route path="/other" element={<Other />} />
               </Routes>
               <ToastList />
             </ErrorBoundary>
           </div>
+          <MobileNavBar />
         </Router>
       </ShowProvider>
     </Provider>

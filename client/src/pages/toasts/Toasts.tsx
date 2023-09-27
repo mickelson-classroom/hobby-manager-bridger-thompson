@@ -20,7 +20,7 @@ export const Toasts = () => {
   return (
     <div className="container">
       <h1 className="text-center">Toasts</h1>
-      <div className="row mt-2">
+      <div className="row mt-2 me-2 me-md-0">
         <div className="col-12 col-md-6 col-lg-3 mb-2">
           <button
             onClick={() => showToastHandler("A success message", "success")}
