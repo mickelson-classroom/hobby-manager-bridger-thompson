@@ -7,7 +7,48 @@ interface ShowState {
 }
 
 const getStoredShows = () => {
-  const savedShowsString = localStorage.getItem("shows") ?? "[]";
+  const savedShowsString = localStorage.getItem("shows");
+  if (!savedShowsString) {
+    const shows = [
+      {
+        id: 1,
+        title: "Breaking Bad",
+        season: 5,
+        episodes: [],
+        rating: 9.5,
+      },
+      {
+        id: 2,
+        title: "Stranger Things",
+        season: 4,
+        episodes: [],
+        rating: 8.7,
+      },
+      {
+        id: 3,
+        title: "Game of Thrones",
+        season: 8,
+        episodes: [],
+        rating: 9.3,
+      },
+      {
+        id: 4,
+        title: "The Crown",
+        season: 5,
+        episodes: [],
+        rating: 8.7,
+      },
+      {
+        id: 5,
+        title: "Friends",
+        season: 10,
+        episodes: [],
+        rating: 8.5,
+      },
+    ];
+    storeShows(shows)
+    return shows
+  }
   return JSON.parse(savedShowsString);
 };
 
