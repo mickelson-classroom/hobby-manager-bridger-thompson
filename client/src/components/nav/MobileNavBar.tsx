@@ -21,10 +21,10 @@ export const MobileNavBar = () => {
           </Link>
         </li>
         <li className="nav-item">
-          <Link to="/other" className="nav-link">
+          <Link to="/animation" className="nav-link">
             <i className='bi-currency-dollar fs-3' />
             <div>
-              Other
+              Animation
             </div>
           </Link>
         </li>

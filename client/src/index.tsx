@@ -14,7 +14,7 @@ import { Toasts } from "./pages/toasts/Toasts";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
 import ToastList from "./components/toast/ToastList";
-import { Other } from "./pages/Other";
+import { Animation } from "./pages/animation/Animation";
 import { MobileNavBar } from "./components/nav/MobileNavBar";
 
 const root = ReactDOM.createRoot(
@@ -33,7 +33,7 @@ root.render(
                 <Route path="/" element={<Shows />} />
                 <Route path="/show/:id" element={<ShowDetails />} />
                 <Route path="/toasts" element={<Toasts />} />
-                <Route path="/other" element={<Other />} />
+                <Route path="/animation" element={<Animation />} />
               </Routes>
               <ToastList />
             </ErrorBoundary>

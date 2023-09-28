@@ -15,8 +15,8 @@ export const NavBar = () => {
           </Link>
         </li>
         <li className="nav-item">
-          <Link to="/other" className="nav-link" aria-current="page">
-            <i className='bi-currency-dollar me-1' />Other
+          <Link to="/animation" className="nav-link" aria-current="page">
+            <i className='bi-currency-dollar me-1' />Animation
           </Link>
         </li>
       </ul>

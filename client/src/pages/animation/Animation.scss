@@ -1,0 +1,33 @@
+.animate-text {
+  animation: textAnimation 4s ease infinite;
+}
+
+@keyframes textAnimation {
+  0% {
+    color: #2196f3;
+    transform: rotate(0deg);
+  }
+
+  25% {
+    font-size: 28px;
+    color: #FF5733;
+    transform: rotate(90deg);
+  }
+
+  50% {
+    font-size: 24px;
+    color: #D91E18;
+    transform: rotate(180deg);
+  }
+
+  75% {
+    font-size: 28px;
+    color: #FF5733;
+    transform: rotate(270deg);
+  }
+
+  100% {
+    color: #2196f3;
+    transform: rotate(360deg);
+  }
+}
