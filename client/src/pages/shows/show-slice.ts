@@ -16,6 +16,7 @@ const getStoredShows = () => {
         season: 5,
         episodes: [],
         rating: 9.5,
+        genre: "Other"
       },
       {
         id: 2,
@@ -23,6 +24,7 @@ const getStoredShows = () => {
         season: 4,
         episodes: [],
         rating: 8.7,
+        genre: "Other"
       },
       {
         id: 3,
@@ -30,6 +32,7 @@ const getStoredShows = () => {
         season: 8,
         episodes: [],
         rating: 9.3,
+        genre: "Other"
       },
       {
         id: 4,
@@ -37,6 +40,7 @@ const getStoredShows = () => {
         season: 5,
         episodes: [],
         rating: 8.7,
+        genre: "Other"
       },
       {
         id: 5,
@@ -44,6 +48,7 @@ const getStoredShows = () => {
         season: 10,
         episodes: [],
         rating: 8.5,
+        genre: "Other"
       },
     ];
     storeShows(shows)

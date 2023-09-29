@@ -10,9 +10,9 @@ export type ShowContextType = {
 
 export const ShowContext = createContext<ShowContextType>({
   shows: [],
-  saveShow: () => {},
-  removeShow: () => {},
-  updateShow: () => {},
+  saveShow: () => { },
+  removeShow: () => { },
+  updateShow: () => { },
 });
 
 const getStoredShows = () => {
@@ -42,6 +42,7 @@ export const ShowProvider: FC<{ children: ReactNode }> = ({ children }) => {
       season: show.season,
       episodes: show.episodes,
       rating: show.rating,
+      genre: "Other"
     };
     const combinedShows = [...shows, newShow];
     setShows(combinedShows);

@@ -3,39 +3,44 @@ import { GenericNumberInput } from "../../components/forms/GenericNumberInput";
 import { Show } from "../../models/Show";
 import { useAppDispatch } from "../../app/hooks";
 import { saveShow, updateShow } from "./show-slice";
-import GenericTextInput from "../../components/forms/GenericTextInput";
 import { FileUpload } from "../../components/forms/FileUpload";
+import { TextInput, useTextInput } from "../../components/forms/TextInput";
+import { SelectInput, useSelectInput } from "../../components/forms/SelectInput";
 
 export const AddShow: FC<{ show?: Show }> = ({ show }) => {
-  const [title, setTitle] = useState(show?.title ?? "")
   const [season, setSeason] = useState(show?.season ?? 1)
   const [rating, setRating] = useState(show?.rating ?? 1)
   const [imageUri, setImageUri] = useState(show?.imageUri ?? "")
   const dispatch = useAppDispatch();
 
+  const titleControl = useTextInput(show?.title ?? "")
+  const genres = ["Action", "Comedy", "Other"]
+  const genreControl = useSelectInput(genres[0], genres)
+
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newShow: Show = {
       id: show?.id ?? Math.random(),
-      title,
+      title: titleControl.value,
       season,
       rating,
       episodes: show?.episodes ?? [],
       imageUri,
+      genre: genreControl.value
     }
     if (!show) {
       dispatch(saveShow(newShow))
-      setTitle("")
       setSeason(1)
       setRating(1)
       setImageUri("")
+      titleControl.setValue("")
     }
     else {
       dispatch(updateShow(newShow))
     }
   }
 
-  const canSubmit = title !== "" && season > 0 && rating <= 10 && rating > 0
+  const canSubmit = titleControl.value !== "" && season > 0 && rating <= 10 && rating > 0
   return (
     <>
       <div className="row text-end">
@@ -60,11 +65,15 @@ export const AddShow: FC<{ show?: Show }> = ({ show }) => {
             </div>
             <div className="modal-body">
               <form onSubmit={submitHandler} className="needs-validation" noValidate>
-                <GenericTextInput
-                  id="titleInput"
+                <TextInput control={titleControl}
                   label="Title"
-                  value={title}
-                  onChange={(value) => setTitle(value)} />
+                  labelClassName="col-12 text-start"
+                  inputClassName="mb-3"
+                  placeholder="title" />
+                <SelectInput control={genreControl}
+                  label="Genre"
+                  labelClassName="col-12"
+                  inputClassName="mb-3" />
                 <GenericNumberInput
                   id="seasonInput"
                   label="Season"

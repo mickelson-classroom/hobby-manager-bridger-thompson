@@ -12,4 +12,5 @@ export interface Show {
   episodes: Episode[];
   rating: number;
   imageUri?: string;
+  genre: string;
 }
