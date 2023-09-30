@@ -27,7 +27,7 @@ root.render(
       <ShowProvider>
         <Router>
           <NavBar />
-          <div className="my-3">
+          <div className="my-3 overflow-auto flex-grow-1 justify-content-between">
             <ErrorBoundary>
               <Routes>
                 <Route path="/" element={<Shows />} />

@@ -39,6 +39,7 @@ export const ShowDetails = () => {
               </div>
               <div className="card-text">Season: {show.season}</div>
               <div className="card-text">Rating: {show.rating}</div>
+              <div className="card-text">Genre: {show.genre}</div>
               <div className="card-text">
                 <div>Episodes:</div>
                 {show.episodes.map((e) => (

@@ -15,7 +15,12 @@ export const AddShow: FC<{ show?: Show }> = ({ show }) => {
 
   const titleControl = useTextInput(show?.title ?? "")
   const genres = ["Action", "Comedy", "Other"]
-  const genreControl = useSelectInput(genres[0], genres)
+  const genreControl = useSelectInput(
+    genres[0], 
+    genres, 
+    (t: string) => t, 
+    (o: string) => o
+  )
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

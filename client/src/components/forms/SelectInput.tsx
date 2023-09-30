@@ -1,30 +1,35 @@
 import { FC, useState } from "react";
 
-export interface SelectInputControl {
+
+export interface SelectInputControl<T> {
   value: string;
   setValue: (i: string) => void;
-  options: string[];
-}
+  options: T[];
+  getValueField: (t: T) => string | number;
+  getDisplayField: (t: T) => string;
+};
 
 export const useSelectInput = (
   initialValue: string,
-  options: string[]
-): SelectInputControl => {
+  options: any[],
+  getValueField: (t: any) => string | number,
+  getDisplayField: (t: any) => string,
+): SelectInputControl<any> => {
   const [value, setValue] = useState<string>(initialValue);
   const handleChange = (selectedValue: string) => {
     setValue(selectedValue);
   };
-  return { value, setValue: handleChange, options };
+  return { value, setValue: handleChange, options, getValueField, getDisplayField };
 };
 
-interface Props {
+interface Props<T> {
   label?: string;
-  control: SelectInputControl;
+  control: SelectInputControl<T>;
   labelClassName?: string;
   inputClassName?: string;
 }
 
-export const SelectInput: FC<Props> = ({
+export const SelectInput: FC<Props<any>> = ({
   label,
   control,
   labelClassName = "col-2",
@@ -53,8 +58,8 @@ export const SelectInput: FC<Props> = ({
         >
           <option value="" disabled></option>
           {control.options.map((option, index) => (
-            <option key={index} value={option}>
-              {option}
+            <option key={index} value={control.getValueField(option)}>
+              {control.getDisplayField(option)}
             </option>
           ))}
         </select>
