@@ -1,6 +1,7 @@
 version: "3"
 services:
   bridger-hobby-client:
+    container_name: bridger-hobby-client
     build: .
 
   bridger-hobby-api:
