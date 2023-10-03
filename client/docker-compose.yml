@@ -3,8 +3,8 @@ services:
   bridger-hobby-client:
     build: .
 
-  bridger-storage-api:
-    container_name: bridger-storage-api
+  bridger-hobby-api:
+    container_name: bridger-hobby-api
     image: bridgert/storage-api:latest
     volumes:
       - /home/bridger/data/apiStorage:/app/storage
