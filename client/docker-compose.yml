@@ -2,8 +2,12 @@ version: "3"
 services:
   bridger-hobby-client:
     build: .
-    # ports:
-    # - 3003:80
+
+  api:
+    image: bridgert/storage-api:latest
+    container_name: bridger-storage-api
+    volumes:
+      - /home/bridger/data/apiStorage:/app/storage
 
   swag:
     image: lscr.io/linuxserver/swag

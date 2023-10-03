@@ -1,4 +1,4 @@
-name: Update home server containers
+name: Update hobbies
 env:
   DUCKDNSTOKEN: ${{ secrets.DUCKDNSTOKEN }}
 on: [push, workflow_dispatch]
@@ -14,4 +14,5 @@ jobs:
           cd client
           docker compose pull
           docker compose build
+          docker compose down
           docker compose up -d
