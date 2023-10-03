@@ -10,7 +10,7 @@ services:
     volumes:
       - /home/bridger/data/apiStorage:/app/storage
 
-  swag:
+  bridger-swag:
     image: lscr.io/linuxserver/swag
     container_name: bridger-swag
     cap_add:
