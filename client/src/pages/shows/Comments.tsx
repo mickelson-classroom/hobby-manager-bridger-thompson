@@ -1,4 +1,4 @@
-import { useState, useEffect, FC } from "react";
+import { useState, useEffect, FC, FormEvent } from "react";
 import { Spinner } from "../../components/spinner/Spinner";
 import { CommentList } from "./CommentList"
 import { Comment } from "../../models/Comment";
@@ -26,7 +26,8 @@ export const Comments: FC<{
     });
   };
 
-  const addComment = async () => {
+  const addComment = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (textControl.value !== "") {
       const newComment: Comment = {
         id: Math.random(),
@@ -36,6 +37,7 @@ export const Comments: FC<{
 
       commentsService.updateComments([...comments, newComment]).then(() => {
         loadComments();
+        textControl.setValue("")
       }).catch((error) => {
         console.error("Error adding comment:", error);
       });
@@ -43,12 +45,25 @@ export const Comments: FC<{
   };
 
   const deleteComment = (id: number) => {
-    console.log("Deleting comment", id)
     const remainingComments = comments.filter(c => c.id !== id)
     commentsService.updateComments(remainingComments).then(() => {
       loadComments();
     }).catch(error => {
       console.log("Error deleting comment:", error)
+    })
+  }
+
+  const updateComment = (newText: string, id: number) => {
+    const updatedComments = comments.map((comment) => {
+      if (comment.id === id) {
+        return { ...comment, text: newText };
+      }
+      return comment;
+    });
+    commentsService.updateComments(updatedComments).then(() => {
+      loadComments();
+    }).catch(error => {
+      console.log("Error updating comment:", error)
     })
   }
 
@@ -58,7 +73,9 @@ export const Comments: FC<{
     <div className="row">
       <div className="col">
         <div className="fs-4">Comments:</div>
-        <CommentList comments={comments.filter(c => c.showId === showId)} deleteHandler={(id) => deleteComment(id)} />
+        <CommentList comments={comments.filter(c => c.showId === showId)}
+          deleteHandler={(id) => deleteComment(id)}
+          updateHandler={updateComment} />
       </div>
       <div className="col-auto">
         <form onSubmit={addComment}>
