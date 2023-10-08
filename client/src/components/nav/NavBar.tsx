@@ -19,6 +19,11 @@ export const NavBar = () => {
             <i className='bi-currency-dollar me-1' />Animation
           </Link>
         </li>
+        <li className="nav-item">
+          <Link to="/tanstack" className="nav-link" aria-current="page">
+            <i className='bi-stack me-1' />Tanstack example
+          </Link>
+        </li>
       </ul>
     </nav>
   );

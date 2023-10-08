@@ -16,6 +16,7 @@ import { store } from "./app/store";
 import ToastList from "./components/toast/ToastList";
 import { Animation } from "./pages/animation/Animation";
 import { MobileNavBar } from "./components/nav/MobileNavBar";
+import { Tanstack } from "./pages/tanstack-example/Tanstack";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -34,6 +35,7 @@ root.render(
                 <Route path="/show/:id" element={<ShowDetails />} />
                 <Route path="/toasts" element={<Toasts />} />
                 <Route path="/animation" element={<Animation />} />
+                <Route path="/tanstack" element={<Tanstack />} />
               </Routes>
               <ToastList />
             </ErrorBoundary>
