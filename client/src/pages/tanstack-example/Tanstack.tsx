@@ -13,20 +13,20 @@ const queryClient = new QueryClient()
 export const Tanstack = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <Todos />
+      <QuickStartComments />
     </QueryClientProvider>
   )
 }
 
-function Todos() {
+function QuickStartComments() {
   const queryClient = useQueryClient()
 
-  const query = useQuery({ queryKey: ['todos'], queryFn: async () => await commentsService.getComments() })
+  const query = useQuery({ queryKey: ['quickStartComments'], queryFn: async () => await commentsService.getComments() })
 
   const mutation = useMutation({
     mutationFn: async (c: Comment[]) => await commentsService.updateComments(c),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['todos'] })
+      queryClient.invalidateQueries({ queryKey: ['quickStartComments'] })
     },
   })
 
