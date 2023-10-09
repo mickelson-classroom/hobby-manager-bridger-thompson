@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Comment } from "../../models/Comment";
+import { Comment } from "../../../models/Comment";
 import { CommentItem } from "./CommentItem";
 
 export const CommentList: FC<{

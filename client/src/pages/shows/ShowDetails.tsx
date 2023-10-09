@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { AddShow } from "./AddShow";
 import { useAppSelector } from "../../app/hooks";
-import { Comments } from "./Comments";
+import { Comments } from "./Comments/Comments";
 
 interface RouteParams {
   id: string;

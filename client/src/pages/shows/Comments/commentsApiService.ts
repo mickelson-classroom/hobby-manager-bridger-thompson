@@ -1,5 +1,5 @@
 import axios from "axios"
-import { Comment } from "../../models/Comment"
+import { Comment } from "../../../models/Comment"
 
 export const commentsService = {
   async updateComments(comments: Comment[]) {

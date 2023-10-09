@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
-import { Comment } from "../../models/Comment";
-import { TextInput, useTextInput } from "../../components/forms/TextInput";
+import { Comment } from "../../../models/Comment";
+import { TextInput, useTextInput } from "../../../components/forms/TextInput";
 
 export const CommentItem: FC<{
   comment: Comment;

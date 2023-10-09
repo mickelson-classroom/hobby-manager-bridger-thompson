@@ -5,7 +5,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
-import { commentsService } from '../shows/commentsApiService'
+import { commentsService } from '../shows/Comments/commentsApiService'
 import { Comment } from '../../models/Comment'
 
 const queryClient = new QueryClient()
