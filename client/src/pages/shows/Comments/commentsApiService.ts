@@ -12,6 +12,7 @@ export const commentsService = {
     const url = "https://bridger-shows.duckdns.org:3003/api/store?key=showComments"
     // const url = "https://100.68.122.57:3003/api/store?key=showComments"
     const response = await axios.get(url)
+    // throw("Oh hi mark")
     return response.data
   },
 }

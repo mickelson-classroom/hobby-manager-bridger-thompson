@@ -19,6 +19,7 @@ import { MobileNavBar } from "./components/nav/MobileNavBar";
 import { Tanstack } from "./pages/tanstack-example/Tanstack";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { GetQueryClient } from "./queryClient";
+import { Toaster } from "react-hot-toast";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -32,6 +33,7 @@ root.render(
       <ShowProvider>
         <QueryClientProvider client={queryClient}>
           <Router>
+            <Toaster />
             <NavBar />
             <div className="my-3 overflow-auto flex-grow-1 justify-content-between">
               <ErrorBoundary>

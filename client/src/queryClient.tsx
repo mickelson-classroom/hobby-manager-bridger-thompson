@@ -1,15 +1,9 @@
 import { QueryClient } from "@tanstack/react-query";
 import toast, { ErrorIcon } from "react-hot-toast";
 
-const addErrorAsToast = async (error: any) => {
+const toastError = async (error: any) => {
   console.log(error);
-  const message = error.response?.data.detail
-    ? error.response?.data.detail
-      ? `${error.response?.data.detail}`
-      : `Error With Request`
-    : typeof error === "string"
-      ? error
-      : JSON.stringify(error);
+  const message = `Whoops... An error has occurred: ${error}`
 
   toast(
     (t: any) => (
@@ -38,11 +32,13 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
-      onError: addErrorAsToast,
+      onError: toastError,
       retry: 0,
+      staleTime: 30000,
+      refetchInterval: 30000,
     },
     mutations: {
-      onError: addErrorAsToast,
+      onError: toastError,
       retry: 0,
     },
   },

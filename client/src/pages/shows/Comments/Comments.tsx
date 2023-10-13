@@ -3,19 +3,22 @@ import { Spinner } from "../../../components/spinner/Spinner";
 import { CommentList } from "./CommentList"
 import { Comment } from "../../../models/Comment";
 import { TextInput, useTextInput } from "../../../components/forms/TextInput";
-import { useGetCommentsQuery, useUpdateCommentsMutation } from "./commentHooks";
+import { useAddCommentsMutation, useGetAllComments, useGetCommentsForShowQuery, useUpdateCommentsMutation } from "./commentHooks";
 
 export const Comments: FC<{
   showId: number
 }> = ({ showId }) => {
-  const commentsQuery = useGetCommentsQuery();
-  const updateCommentsMutation = useUpdateCommentsMutation();
+  const commentsQuery = useGetAllComments();
   const comments = commentsQuery.data
+  const showCommentsQuery = useGetCommentsForShowQuery(showId);
+  const updateCommentsMutation = useUpdateCommentsMutation(showId);
+  const addCommentMutation = useAddCommentsMutation();
+  const showComments = showCommentsQuery.data
   const newCommentControl = useTextInput("")
 
-  if (commentsQuery.isFetching) return <Spinner />
-  if (commentsQuery.isError) return <h3>Error getting comments</h3>
-  if (!comments) return <h3>Unable to get comments</h3>
+  if (showCommentsQuery.isFetching || commentsQuery.isLoading) return <Spinner />
+  if (showCommentsQuery.isError || commentsQuery.isError) return <h3>Error getting comments</h3>
+  if (!showComments || !comments) return <h3>Unable to get comments</h3>
 
   const addComment = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,7 +28,7 @@ export const Comments: FC<{
         text: newCommentControl.value,
         showId,
       };
-      updateCommentsMutation.mutateAsync([...comments, newComment]).then(() => {
+      addCommentMutation.mutateAsync([...comments, newComment]).then(() => {
         newCommentControl.setValue("")
       })
     }
@@ -50,7 +53,7 @@ export const Comments: FC<{
     <div className="row">
       <div className="col">
         <div className="fs-4">Comments:</div>
-        <CommentList comments={comments.filter(c => c.showId === showId)}
+        <CommentList comments={showComments}
           deleteHandler={(id) => deleteComment(id)}
           updateHandler={updateComment} />
       </div>
@@ -61,7 +64,7 @@ export const Comments: FC<{
             labelClassName="col-12" />
           <div className="text-end">
             <button className="btn btn-success my-2"
-              disabled={commentsQuery.isFetching}
+              disabled={showCommentsQuery.isFetching}
               type="submit">Add</button>
           </div>
         </form>

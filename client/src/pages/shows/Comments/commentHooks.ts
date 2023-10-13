@@ -6,17 +6,36 @@ import { GetQueryClient } from "../../../queryClient";
 const queryClient = GetQueryClient();
 
 export const CommentKeys = {
-  commentsKey: ["commentsKey"] as const
+  commentsKey: ["commentsKey"] as const,
+  showCommentsKey: (showId: number) => ["commentsKey", showId] as const
 }
 
-export const useGetCommentsQuery = () => {
+export const useGetAllComments = () => useQuery({
+  queryKey: CommentKeys.commentsKey,
+  queryFn: async () => await commentsService.getComments()
+})
+
+export const useGetCommentsForShowQuery = (showId: number) => {
   return useQuery({
-    queryKey: CommentKeys.commentsKey,
-    queryFn: async () => await commentsService.getComments()
+    queryKey: CommentKeys.showCommentsKey(showId),
+    queryFn: async () => {
+      const all = await commentsService.getComments()
+      return all.filter(c => c.showId === showId);
+    }
   })
 }
 
-export const useUpdateCommentsMutation = () => {
+export const useUpdateCommentsMutation = (showId: number) => {
+  return useMutation(async (updatedComments: Comment[]) => {
+    return await commentsService.updateComments(updatedComments)
+  },
+  {
+    onSuccess: () => 
+      queryClient.invalidateQueries(CommentKeys.showCommentsKey(showId))
+  })
+}
+
+export const useAddCommentsMutation = () => {
   return useMutation(async (updatedComments: Comment[]) => {
     return await commentsService.updateComments(updatedComments)
   },
