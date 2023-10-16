@@ -3,7 +3,25 @@ env:
   DUCKDNSTOKEN: ${{ secrets.DUCKDNSTOKEN }}
 on: [push, workflow_dispatch]
 jobs:
+  lint:
+    runs-on: [self-hosted]
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Run ESLint
+        run: |
+          cd client
+          docker build -t bridger_eslint -f eslint.Dockerfile .
+          docker run -i --rm bridger_eslint
+
   deploy-application:
+    needs: lint
     runs-on: [ self-hosted ]
     steps:
       - name: checkout repo

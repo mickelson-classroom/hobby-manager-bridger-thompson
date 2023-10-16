@@ -4,6 +4,7 @@ import { Bubbles } from "../../components/bubbles/Bubbles";
 import { Submarine } from "../../components/submarine/Submarine";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { removeShow } from "./show-slice";
+import { useState } from "react";
 
 export const Shows = () => {
   const shows = useAppSelector((state) => state.shows.shows)
